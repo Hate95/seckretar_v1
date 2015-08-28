@@ -1,0 +1,42 @@
+#ifndef MYTABLE_H
+#define MYTABLE_H
+#include <QAbstractListModel>
+#include <QList>
+
+class MyTable: public QAbstractListModel
+{
+    Q_OBJECT
+private:
+    struct Strock
+    {
+      QString dist;
+      QString competition;
+      QString date;
+            
+    };
+
+public:
+    MyTable(const QList<Strock>& list, QObject* pobj = 0);
+    ~MyTable();
+    
+    QVariant data(const QModelIndex& index, int nRole) const;
+    
+    bool setData(const QModelIndex& index,
+    const QVariant& value,
+    int nRole
+    );
+    
+    int rowCount(const QModelIndex& parent = QModelIndex()) const;
+    
+    QVariant headerData(int nSection,
+    Qt::Orientation orientation,
+    int nRole = Qt::DisplayRole
+    ) const;
+    
+    Qt::ItemFlags flags(const QModelIndex &index) const;
+private:
+    QList<Strock>   m_strock;
+    
+};
+
+#endif // MYTABLE_H
